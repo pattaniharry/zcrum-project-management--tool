@@ -22,12 +22,13 @@ export default function RootLayout({ children }) {
           colorInputText: "#F3F4F6",
         },
         elements: {
-          formButtonPrimary: "text-white",
+          formButtonPrimary: "!text-white ",
+          card: "bg-white",
         },
       }}
     >
       <html lang="en" suppressHydrationWarning>
-        <body className={inter.className}>
+        <body className={`${inter.className} dotted-background`}>
           <ThemeProvider
             attribute="class"
             defaultTheme="system"
