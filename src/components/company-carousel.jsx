@@ -24,7 +24,7 @@ const CompanyCarousel = () => {
         <CarouselContent className="flex gap-5 sm:gap-20 items-center justify-center">
           {companies.map(({ name, path, id }) => {
             return (
-              <CarouselItem key={id} className="basis-1/3 lg:basis-1/5">
+              <CarouselItem key={id} className="basis-1/3 lg:basis-1/5 mx-auto">
                 <Image
                   src={path}
                   alt={id}

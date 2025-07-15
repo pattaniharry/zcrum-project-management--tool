@@ -151,7 +151,7 @@ export default function Home() {
             projects and boost productivity.
           </p>
           <Link href="/onboarding">
-            <Button>
+            <Button size="lg" className={"animate-bounce"}>
               Start For Free <ArrowRight className="ml-2 h-5 w-5" />
             </Button>
           </Link>
