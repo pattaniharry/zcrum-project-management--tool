@@ -11,8 +11,10 @@ import Image from "next/image";
 import { Button } from "./ui/button";
 import { PenBox } from "lucide-react";
 import UserMenu from "./ui/user-menu";
+import { checkUser } from "./lib/checkUser";
 
-function header() {
+const header = async () => {
+  await checkUser();
   return (
     <header className="container">
       <nav className="py-6 px-4 flex items-center justify-between">
@@ -51,6 +53,6 @@ function header() {
       </nav>
     </header>
   );
-}
+};
 
 export default header;
