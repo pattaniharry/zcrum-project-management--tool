@@ -2,7 +2,7 @@ import { Button } from "@/components/ui/button";
 import { redirect } from "next/navigation";
 import Image from "next/image";
 import Link from "next/link";
-import Onboarding from "./onboarding/page";
+// import Onboarding from "./(main)/onboarding/[[...onboarding]]/page";
 import {
   Card,
   CardAction,

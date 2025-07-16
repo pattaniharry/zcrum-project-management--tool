@@ -8,6 +8,15 @@ const isProtectedRoute = createRouteMatcher([
 
 export default clerkMiddleware((auth, req) => {
   if (isProtectedRoute(req)) auth().protect();
+
+  if (
+    auth().userId &&
+    !auth().orgId &&
+    req.nextUrl.pathname !== "/onboarding" &&
+    req.nextUrl.pathname !== "/"
+  ) {
+    return Nextresponse.redirect(new URL("/onboarding", req.url));
+  }
 });
 
 export const config = {
