@@ -1,36 +1,89 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# 🧠 Next.js 14 Project Management Tool
 
-## Getting Started
+A fully functional Project Management Tool built using **Next.js 14 App Router**, designed for scalability, performance, and real-world use cases.
 
-First, run the development server:
+---
 
-```bash
+## 🚀 Features
+
+- ✅ **Authentication** with [Clerk](https://clerk.dev)
+- 🌐 **App Router** and layout system (Next.js 14)
+- 🎨 **TailwindCSS** + **ShadCN UI** for modern styling
+- 📊 **Recharts** for beautiful analytics graphs
+- 🧠 **Zod** for schema validation
+- 🔗 **PostgreSQL** + **Prisma** for data handling
+- ☁️ **UploadThing** + **Cloudinary** for file/image uploads
+
+---
+
+---
+
+## 🛠️ Tech Stack
+
+- **Frontend**: Next.js 14, React, TypeScript
+- **Styling**: TailwindCSS, ShadCN, Lucide Icons
+- **Auth**: Clerk
+- **Database**: PostgreSQL (via Prisma ORM)
+- **File Upload**: UploadThing + Cloudinary
+- **Validation**: Zod
+- **Charts**: Recharts
+
+---
+
+## 📁 Folder Structure
+
+/app
+/dashboard
+/api
+/components
+/lib
+/actions
+/validators
+
+## 🧑‍💻 Getting Started
+
+![alt text](/screenshots/image-2.png)
+
+![alt text](/screenshots/image.png)
+
+![alt text](/screenshots/image-1.png)
+
+### 1. Clone the Repo
+
+git clone https://github.com/yourusername/next14-admin-dashboard.git
+cd next14-admin-dashboard
+
+### 2. Install Dependencies
+
+npm install
+
+### 3. set up environment variable
+
+DATABASE_URL=postgresql://<user>:<password>@localhost:5432/<your-db>
+CLERK_PUBLISHABLE_KEY=your_clerk_key
+CLERK_SECRET_KEY=your_clerk_secret
+UPLOADTHING_SECRET=your_uploadthing_secret
+UPLOADTHING_APP_ID=your_uploadthing_id
+CLOUDINARY_CLOUD_NAME=your_cloud_name
+CLOUDINARY_API_KEY=your_api_key
+CLOUDINARY_API_SECRET=your_api_secret
+
+### 4. npx prisma generate
+
+npx prisma migrate dev --name init
+
+### 5. Run the Dev Server
+
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+✅ Available Pages
+Route Description
+/ Landing / Overview Page
+/dashboard Protected Admin Dashboard
+/sign-in Login with Clerk
+/settings User or App settings
 
-You can start editing the page by modifying `app/page.js`. The page auto-updates as you edit the file.
+🤝 Contributing
+Pull requests are welcome. For major changes, please open an issue first to discuss what you would like to change.
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
-
-## Learn More
-
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+Built with ❤️ following [this video tutorial](https://www.youtube.com/watch?v=R5dBYINNouY)
