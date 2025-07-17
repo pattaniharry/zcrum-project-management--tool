@@ -1,13 +1,13 @@
 import { clerkMiddleware, createRouteMatcher } from "@clerk/nextjs/server";
-
+import { NextResponse } from "next/server";
 const isProtectedRoute = createRouteMatcher([
   "/onboarding(.*)",
   "/forum(.*)",
   "/",
 ]);
 
-export default clerkMiddleware((auth, req) => {
-  if (isProtectedRoute(req)) auth().protect();
+export default clerkMiddleware(async (auth, req) => {
+  if (isProtectedRoute(req)) await auth.protect();
 
   if (
     auth().userId &&
@@ -15,7 +15,7 @@ export default clerkMiddleware((auth, req) => {
     req.nextUrl.pathname !== "/onboarding" &&
     req.nextUrl.pathname !== "/"
   ) {
-    return Nextresponse.redirect(new URL("/onboarding", req.url));
+    return NextResponse.redirect(new URL("/onboarding", req.url));
   }
 });
 

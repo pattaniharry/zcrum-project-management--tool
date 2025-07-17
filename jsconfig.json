@@ -3,9 +3,10 @@
     "baseUrl": "src",
        "paths": {
       "@/components/*": ["components/*"],
-      "@/lib/*": ["lib/*"],
+      "@/lib/*": ["components/lib/*"],
       "@/hooks/*": ["hooks/*"],
-      "@/app/*": ["app/*"]
+      "@/app/*": ["app/*"],
+      "@/actions/*": ["actions/*"]
     }
   }
 }
