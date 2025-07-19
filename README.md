@@ -50,8 +50,7 @@ A fully functional Project Management Tool built using **Next.js 14 App Router**
 
 ### 1. Clone the Repo
 
-git clone https://github.com/yourusername/next14-admin-dashboard.git
-cd next14-admin-dashboard
+clone this repo
 
 ### 2. Install Dependencies
 
@@ -86,4 +85,4 @@ Route Description
 🤝 Contributing
 Pull requests are welcome. For major changes, please open an issue first to discuss what you would like to change.
 
-Built with ❤️ following [this video tutorial](https://www.youtube.com/watch?v=R5dBYINNouY)
+Built with ❤️ following RoadSide Coder

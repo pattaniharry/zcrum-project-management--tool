@@ -1,17 +1,23 @@
 "use client";
-import OrgSwitcher from "@/components/org-switcher";
-import { useOrganization, useUser } from "@clerk/nextjs";
-import React, { useState, useEffect } from "react";
+
+import { useState, useEffect } from "react";
 import { useForm } from "react-hook-form";
-import { set } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { projectSchema } from "@/components/lib/schema/validators";
+import { useRouter } from "next/navigation";
+import { useOrganization, useUser } from "@clerk/nextjs";
+import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
-import { Button } from "@/components/ui/button";
-const CreateProjectPage = () => {
+import useFetch from "@/hooks/use-fetch";
+import { projectSchema } from "@/components/lib/schema/validators";
+import { createProject } from "@/actions/projects";
+import { BarLoader } from "react-spinners";
+import OrgSwitcher from "@/components/org-switcher";
+
+export default function CreateProjectPage() {
+  const router = useRouter();
   const { isLoaded: isOrgLoaded, membership } = useOrganization();
-  const { isLoaded: isUserLoaded, user } = useUser();
+  const { isLoaded: isUserLoaded } = useUser();
   const [isAdmin, setIsAdmin] = useState(false);
 
   const {
@@ -28,38 +34,57 @@ const CreateProjectPage = () => {
     }
   }, [isOrgLoaded, isUserLoaded, membership]);
 
+  const {
+    loading,
+    error,
+    data: project,
+    fn: createProjectFn,
+  } = useFetch(createProject);
+
+  const onSubmit = async (data) => {
+    if (!isAdmin) {
+      alert("Only organization admins can create projects");
+      return;
+    }
+
+    createProjectFn(data);
+  };
+
+  useEffect(() => {
+    if (project) router.push(`/project/${project.id}`);
+  }, [loading]);
+
   if (!isOrgLoaded || !isUserLoaded) {
     return null;
   }
 
-  const onsubmit = async () => {};
-
   if (!isAdmin) {
     return (
-      <div className="text-center">
-        <h1 className="text-2xl font-bold">Access Denied</h1>
-        <p>You do not have permission to create a project.</p>
+      <div className="flex flex-col gap-2 items-center">
+        <span className="text-2xl gradient-title">
+          Oops! Only Admins can create projects.
+        </span>
         <OrgSwitcher />
       </div>
     );
   }
 
   return (
-    <div className="container mx-auto py-10 ">
+    <div className="container mx-auto py-10">
       <h1 className="text-6xl text-center font-bold mb-8 gradient-title">
-        Create New Project{" "}
+        Create New Project
       </h1>
+
       <form
-        action=""
-        className=" flex flex-col gap-4"
-        onSubmit={handleSubmit(onsubmit)}
+        onSubmit={handleSubmit(onSubmit)}
+        className="flex flex-col space-y-4"
       >
         <div>
           <Input
             id="name"
+            {...register("name")}
             className="bg-slate-950"
             placeholder="Project Name"
-            {...register("name")}
           />
           {errors.name && (
             <p className="text-red-500 text-sm mt-1">{errors.name.message}</p>
@@ -68,9 +93,9 @@ const CreateProjectPage = () => {
         <div>
           <Input
             id="key"
-            className="bg-slate-950"
-            placeholder="Project key (Ex: GGL)"
             {...register("key")}
+            className="bg-slate-950"
+            placeholder="Project Key (Ex: RCYT)"
           />
           {errors.key && (
             <p className="text-red-500 text-sm mt-1">{errors.key.message}</p>
@@ -79,9 +104,9 @@ const CreateProjectPage = () => {
         <div>
           <Textarea
             id="description"
+            {...register("description")}
             className="bg-slate-950 h-28"
             placeholder="Project Description"
-            {...register("description")}
           />
           {errors.description && (
             <p className="text-red-500 text-sm mt-1">
@@ -89,16 +114,19 @@ const CreateProjectPage = () => {
             </p>
           )}
         </div>
+        {loading && (
+          <BarLoader className="mb-4" width={"100%"} color="#36d7b7" />
+        )}
         <Button
           type="submit"
           size="lg"
-          className="bg-blue-500 text-white hover:text-blue-500"
+          disabled={loading}
+          className="bg-blue-500 text-white"
         >
-          Create Project
+          {loading ? "Creating..." : "Create Project"}
         </Button>
+        {error && <p className="text-red-500 mt-2">{error.message}</p>}
       </form>
     </div>
   );
-};
-
-export default CreateProjectPage;
+}

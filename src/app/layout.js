@@ -5,6 +5,8 @@ const inter = Inter({ subsets: ["latin"] });
 import { ThemeProvider } from "@/components/theme-provider";
 import Header from "@/components/Header";
 import { shadesOfPurple } from "@clerk/themes";
+import { Toaster } from "sonner";
+
 export const metadata = {
   title: "zcrum",
   description: "Project management application for offices",
@@ -37,6 +39,7 @@ export default function RootLayout({ children }) {
           >
             <Header />
             <main className="min-h-screen">{children}</main>
+            <Toaster richColors />
             <footer>
               <p className="bg-gray-900 py-12 text-center">
                 made with love by harry
