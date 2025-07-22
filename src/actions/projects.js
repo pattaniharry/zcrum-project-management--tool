@@ -65,3 +65,32 @@ export async function getProjects(orgId) {
 
   return projects;
 }
+
+export async function deleteProject(projectId) {
+  const { userId, orgId, orgRole } = await auth();
+
+  if (!userId || !orgId) {
+    throw new Error("Unauthorized ");
+  }
+
+  if (orgRole !== "org:admin") {
+    throw new Error("User does not have permission to delete a project");
+  }
+
+  const project = await db.project.findUnique({
+    where: { id: projectId },
+  });
+
+  if (!project || project.organizationId !== orgId) {
+    throw new Error("Project not found");
+  }
+
+  try {
+    await db.project.delete({
+      where: { id: projectId },
+    });
+    return { success: true, message: "Project deleted successfully" };
+  } catch (error) {
+    throw new Error("Failed to delete project: " + error.message);
+  }
+}
