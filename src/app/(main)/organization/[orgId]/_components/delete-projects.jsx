@@ -6,9 +6,11 @@ import { Button } from "@/components/ui/button";
 import { Trash2 } from "lucide-react";
 import useFetch from "@/hooks/use-fetch";
 import { deleteProject } from "@/actions/projects";
-
+import { useRouter } from "next/navigation";
+import { toast } from "react-hot-toast";
 const DeleteProject = ({ projectId }) => {
   const { membership } = useOrganization();
+  const router = useRouter();
 
   const {
     data: deleted,
@@ -29,8 +31,8 @@ const DeleteProject = ({ projectId }) => {
 
   useEffect(() => {
     if (deleted) {
-      alert("Project deleted successfully");
-      window.location.reload(); // Reload the page to reflect changes
+      router.refresh();
+      toast.error("Project deleted successfully");
     }
   }, [deleted]);
 
