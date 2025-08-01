@@ -20,6 +20,10 @@ const SprintBoard = ({ sprints, projectId, orgId }) => {
     setIsDrawerOpen(true);
   };
 
+  const handleIssueCreated = () => {
+    //fetch issues again
+  };
+
   return (
     <div>
       {/* Sprint Manger */}
